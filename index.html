@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffc0cb 0%, #ffb6d9 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 620px;
+            max-width: 90vw;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .image-container {
+            margin-bottom: 30px;
+        }
+
+        .cute-bear {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #ff1493;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            position: relative;
+            height: 60px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            color: white;
+            flex: 1;
+            max-width: 150px;
+        }
+
+        .yes-btn:hover {
+            transform: scale(2);
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #ff69b4 0%, #ffb6d9 100%);
+            color: #333;
+            position: fixed;
+            max-width: 150px;
+        }
+
+        .no-btn:hover {
+            transform: translate(0, 0);
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 30px;
+            font-size: 24px;
+            color: #ff1493;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hearts {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            animation: float-up 3s ease-in forwards;
+            opacity: 0.7;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-500px) rotate(20deg);
+            }
+        }
+
+        .name-text {
+            color: #ff1493;
+            font-weight: bold;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <svg class="cute-bear" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Bear body -->
+                <circle cx="100" cy="120" r="70" fill="#D4A574"/>
+                <!-- Bear head -->
+                <circle cx="100" cy="70" r="55" fill="#D4A574"/>
+                <!-- Ears -->
+                <circle cx="70" cy="30" r="20" fill="#D4A574"/>
+                <circle cx="130" cy="30" r="20" fill="#D4A574"/>
+                <circle cx="70" cy="32" r="10" fill="#8B6F47"/>
+                <circle cx="130" cy="32" r="10" fill="#8B6F47"/>
+                <!-- Eyes -->
+                <circle cx="85" cy="65" r="8" fill="#000"/>
+                <circle cx="115" cy="65" r="8" fill="#000"/>
+                <circle cx="88" cy="63" r="3" fill="#fff"/>
+                <circle cx="118" cy="63" r="3" fill="#fff"/>
+                <!-- Nose -->
+                <circle cx="100" cy="80" r="6" fill="#000"/>
+                <!-- Mouth -->
+                <path d="M 100 80 Q 95 90 85 88" stroke="#000" stroke-width="2" fill="none"/>
+                <path d="M 100 80 Q 105 90 115 88" stroke="#000" stroke-width="2" fill="none"/>
+                <!-- Heart on chest -->
+                <path d="M 100 120 C 100 110, 110 110, 110 100 C 110 95, 107 92, 100 92 C 93 92, 90 95, 90 100 C 90 110, 100 120, 100 120 Z M 100 120 C 100 110, 90 110, 90 100 C 90 95, 93 92, 100 92 C 107 92, 110 95, 110 100 C 110 110, 100 120, 100 120 Z" fill="#FF1493"/>
+            </svg>
+        </div>
+        
+        <h1><span class="name-text">Jass❤️</span>will you be my valentine?</h1>
+        
+        <div class="buttons-container">
+            <button class="yes-btn" onclick="handleYes()">💗 Yes</button>
+            <button class="no-btn" onclick="handleNo()">No</button>
+        </div>
+
+        <div class="success-message">
+            🎉 YAAYYY! I LOVE YOU! 💕
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.querySelector('.no-btn');
+        let isButtonActive = true;
+
+        // Initial position of the No button
+        function setInitialPosition() {
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            const buttonWidth = noBtn.offsetWidth;
+            const buttonHeight = noBtn.offsetHeight;
+            
+            noBtn.style.left = (containerRect.right - buttonWidth - 30) + 'px';
+            noBtn.style.top = (containerRect.top + containerRect.height - buttonHeight - 60) + 'px';
+        }
+
+        setInitialPosition();
+        window.addEventListener('resize', setInitialPosition);
+
+        function handleYes() {
+            document.querySelector('.buttons-container').style.display = 'none';
+            noBtn.style.display = 'none';
+            document.querySelector('.success-message').style.display = 'block';
+            createHearts();
+            document.body.style.background = 'linear-gradient(135deg, #ff1493 0%, #ff69b4 50%, #ffc0cb 100%)';
+            isButtonActive = false;
+        }
+
+        function moveNoButtonRandomly() {
+            if (!isButtonActive) return;
+            
+            const randomX = Math.random() * (window.innerWidth - 150);
+            const randomY = Math.random() * (window.innerHeight - 60);
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function handleNo() {
+            moveNoButtonRandomly();
+        }
+
+        // Move button away on hover
+        noBtn.addEventListener('mouseenter', moveNoButtonRandomly);
+
+        // Also move button away if cursor gets close to it
+        document.addEventListener('mousemove', (e) => {
+            if (!isButtonActive) return;
+
+            const buttonRect = noBtn.getBoundingClientRect();
+            const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+            const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+
+            const distance = Math.sqrt(
+                Math.pow(e.clientX - buttonCenterX, 2) + 
+                Math.pow(e.clientY - buttonCenterY, 2)
+            );
+
+            // If cursor gets within 100px, move the button
+            if (distance < 100) {
+                moveNoButtonRandomly();
+            }
+        });
+
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.style.position = 'fixed';
+                    heart.style.left = Math.random() * window.innerWidth + 'px';
+                    heart.style.top = window.innerHeight + 'px';
+                    heart.style.fontSize = '30px';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.animation = 'float-up 3s ease-in forwards';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
